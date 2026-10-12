@@ -1,0 +1,182 @@
+.eng {
+  --eng-cut: #ece5d9;
+  --eng-cut-line: #8f8a84;
+  --eng-cav-0: #aeaeab;
+  --eng-cav-1: #b8b8b5;
+  --eng-cav-2: #c2c2bf;
+  --eng-cav-3: #cbcbc8;
+  --eng-cav-top: #d3d3d0;
+  --eng-cav-line: #8e8e92;
+  --eng-rubber: #d0d0cc;
+  --eng-spark: #ffb020;
+  --eng-spark-core: #fffbe8;
+  --eng-gas-fresh: 120 150 190;
+  --eng-gas-burnt: 120 110 100;
+  border-radius: 10px;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.iso[data-theme="dark"] .eng {
+  --eng-cut: #222220;
+  --eng-cut-line: #5a5a5c;
+  --eng-cav-0: #0c0c0c;
+  --eng-cav-1: #0e0e0e;
+  --eng-cav-2: #101010;
+  --eng-cav-3: #121212;
+  --eng-cav-top: #141414;
+  --eng-cav-line: #333335;
+  --eng-rubber: #0d0d0d;
+}
+
+.eng:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.eng .iso-svg {
+  overflow: visible;
+}
+
+.eng-stack {
+  position: relative;
+}
+
+.eng-stack > .eng-front,
+.eng-stack > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.eng-stack > canvas {
+  pointer-events: none;
+}
+
+.eng-cut {
+  fill: var(--eng-cut);
+  fill-rule: evenodd;
+  stroke: var(--eng-cut-line);
+  stroke-width: 0.6px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.eng-cav {
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.eng-cav[data-shade="0"] { fill: var(--eng-cav-0); stroke: var(--eng-cav-0); }
+.eng-cav[data-shade="1"] { fill: var(--eng-cav-1); stroke: var(--eng-cav-1); }
+.eng-cav[data-shade="2"] { fill: var(--eng-cav-2); stroke: var(--eng-cav-2); }
+.eng-cav[data-shade="3"] { fill: var(--eng-cav-3); stroke: var(--eng-cav-3); }
+.eng-cav[data-shade="top"] { fill: var(--eng-cav-top); stroke: var(--eng-cav-top); }
+
+.eng-cav-line {
+  fill: none;
+  stroke: var(--eng-cav-line);
+  stroke-width: 0.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.eng-rubber > .iso-top,
+.eng-rubber > .iso-shade {
+  fill: var(--eng-rubber);
+}
+
+.eng-fade-1 { opacity: 0.25; }
+.eng-fade-2 { opacity: 0.5; }
+.eng-fade-3 { opacity: 0.75; }
+
+.eng-spark {
+  fill: var(--eng-spark);
+  stroke: none;
+}
+
+.eng-spark-core {
+  fill: var(--eng-spark-core);
+  stroke: none;
+}
+
+.eng-gas {
+  stroke: none;
+  mix-blend-mode: multiply;
+}
+
+.eng-gears {
+  display: flex;
+  padding: 1px;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.eng-gear {
+  font: inherit;
+  font-family: var(--anatomy-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  min-width: 34px;
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--anatomy-text);
+  background: var(--anatomy-card);
+  box-shadow: 0 0 0 1px var(--anatomy-lo);
+  cursor: pointer;
+}
+
+.eng-gear[aria-pressed="true"] {
+  color: var(--anatomy-strong);
+  box-shadow: 0 0 0 1px var(--anatomy-hi);
+}
+
+.eng-gear:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 2px;
+}
+
+.eng-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .eng {
+    overflow: hidden;
+  }
+
+  .iso-plate .eng .eng-stack {
+    width: 112%;
+    margin: -3% -6% -2%;
+  }
+}
+
+.eng-cavsolid > .iso-shade[data-shade="0"] { fill: var(--eng-cav-0); }
+.eng-cavsolid > .iso-shade[data-shade="1"] { fill: var(--eng-cav-1); }
+.eng-cavsolid > .iso-shade[data-shade="2"] { fill: var(--eng-cav-2); }
+.eng-cavsolid > .iso-shade[data-shade="3"] { fill: var(--eng-cav-3); }
+.eng-cavsolid > .iso-top { fill: var(--eng-cav-top); }
+
+.eng [data-k^="pair"][data-on] .iso-fill { fill: var(--anatomy-face); }
+.eng [data-k^="pair"][data-on] .iso-top { fill: var(--anatomy-lit-top); }
+.eng [data-k^="pair"][data-on] .iso-shade { fill: var(--anatomy-lit-shade); }
+.eng [data-k^="pair"][data-on] .iso-edge { stroke: var(--anatomy-lit); }
+
+.eng .iso-fill { fill-rule: evenodd; }
+
+.eng [data-k^="pair"][data-on] .iso-edge { stroke-width: 1.1px; }
+.eng [data-k^="pair"][data-on] .iso-line[data-tone="lo"] { stroke: var(--anatomy-hi); }
