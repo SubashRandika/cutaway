@@ -5,7 +5,7 @@ export interface Scene {
   slug: string;
   title: string;
   summary: string;
-  icon: "fuel" | "hybrid";
+  icon: "fuel" | "hybrid" | "plug";
 }
 
 export const SCENES: Scene[] = [
@@ -20,6 +20,12 @@ export const SCENES: Scene[] = [
     title: "Hybrid system",
     summary: "Engine, motors and battery, split",
     icon: "hybrid",
+  },
+  {
+    slug: "plug-in-hybrid",
+    title: "Plug-in hybrid",
+    summary: "Charge at the wall, drive on the battery",
+    icon: "plug",
   },
 ];
 
