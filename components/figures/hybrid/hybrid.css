@@ -1,0 +1,194 @@
+.hyb {
+  --hyb-cut: #ece5d9;
+  --hyb-cut-line: #8f8a84;
+  --hyb-cav-0: #aeaeab;
+  --hyb-cav-1: #b8b8b5;
+  --hyb-cav-2: #c2c2bf;
+  --hyb-cav-3: #cbcbc8;
+  --hyb-cav-top: #d3d3d0;
+  --hyb-cav-line: #8e8e92;
+  --hyb-rubber: #d0d0cc;
+  --hyb-oil: #dcd5c4;
+  --hyb-oil-line: #a8976a;
+  --hyb-dial: #fbfaf7;
+  --hyb-spark: #ffb020;
+  --hyb-spark-core: #fffbe8;
+  --hyb-pulse: #3a3a3f;
+  --hyb-pulse-shine: #8a8a8f;
+  border-radius: 10px;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.iso[data-theme="dark"] .hyb {
+  --hyb-cut: #222220;
+  --hyb-cut-line: #5a5a5c;
+  --hyb-cav-0: #0c0c0c;
+  --hyb-cav-1: #0e0e0e;
+  --hyb-cav-2: #101010;
+  --hyb-cav-3: #121212;
+  --hyb-cav-top: #141414;
+  --hyb-cav-line: #333335;
+  --hyb-rubber: #0d0d0d;
+  --hyb-oil: #2a2519;
+  --hyb-oil-line: #4a4230;
+  --hyb-dial: #1b1b1a;
+  --hyb-pulse: #d8d8d8;
+  --hyb-pulse-shine: #ffffff;
+}
+
+.hyb:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.hyb .iso-svg {
+  overflow: visible;
+}
+
+.hyb-cut {
+  fill: var(--hyb-cut);
+  fill-rule: evenodd;
+  stroke: var(--hyb-cut-line);
+  stroke-width: 0.6px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.hyb-cav {
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.hyb-cav[data-shade="0"] { fill: var(--hyb-cav-0); stroke: var(--hyb-cav-0); }
+.hyb-cav[data-shade="1"] { fill: var(--hyb-cav-1); stroke: var(--hyb-cav-1); }
+.hyb-cav[data-shade="2"] { fill: var(--hyb-cav-2); stroke: var(--hyb-cav-2); }
+.hyb-cav[data-shade="3"] { fill: var(--hyb-cav-3); stroke: var(--hyb-cav-3); }
+.hyb-cav[data-shade="top"] { fill: var(--hyb-cav-top); stroke: var(--hyb-cav-top); }
+
+.hyb-cav-line {
+  fill: none;
+  stroke: var(--hyb-cav-line);
+  stroke-width: 0.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.hyb-cavsolid > .iso-shade[data-shade="0"] { fill: var(--hyb-cav-0); }
+.hyb-cavsolid > .iso-shade[data-shade="1"] { fill: var(--hyb-cav-1); }
+.hyb-cavsolid > .iso-shade[data-shade="2"] { fill: var(--hyb-cav-2); }
+.hyb-cavsolid > .iso-shade[data-shade="3"] { fill: var(--hyb-cav-3); }
+.hyb-cavsolid > .iso-top { fill: var(--hyb-cav-top); }
+
+.hyb-rubber > .iso-top,
+.hyb-rubber > .iso-shade {
+  fill: var(--hyb-rubber);
+}
+
+.hyb-oil {
+  fill: var(--hyb-oil);
+  stroke: var(--hyb-oil-line);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.hyb-oil-cut {
+  fill: var(--hyb-oil);
+  stroke: none;
+}
+
+.hyb-dial {
+  fill: var(--hyb-dial);
+  stroke: none;
+}
+
+.hyb-needle {
+  stroke-width: 1.1px;
+}
+
+.hyb-fade-1 { opacity: 0.25; }
+.hyb-fade-2 { opacity: 0.5; }
+.hyb-fade-3 { opacity: 0.75; }
+
+.hyb-spark { fill: var(--hyb-spark); stroke: none; }
+.hyb-spark-core { fill: var(--hyb-spark-core); stroke: none; }
+
+.hyb .iso-fill { fill-rule: evenodd; }
+
+/* Windings and cables carrying current take the figure's one accent. */
+.hyb .hyb-wind[data-on] .iso-fill { fill: var(--anatomy-face); }
+.hyb .hyb-wind[data-on] .iso-top { fill: var(--anatomy-lit-top); }
+.hyb .hyb-wind[data-on] .iso-shade { fill: var(--anatomy-lit-shade); }
+.hyb .hyb-wind[data-on] .iso-edge { stroke: var(--anatomy-lit); stroke-width: 1.1px; }
+
+/* a pulse of current: a dark slug on paper, a bright one on the dark plate */
+.hyb .hyb-cable[data-on] .tb-body,
+.hyb .hyb-cable[data-on] .tb-shade { fill: var(--hyb-pulse); }
+.hyb .hyb-cable[data-on] .tb-shine { fill: var(--hyb-pulse-shine); }
+.hyb .hyb-cable[data-on] .iso-line { stroke: var(--anatomy-lit); }
+
+.hyb-plate {
+  fill: var(--anatomy-top);
+  stroke: var(--anatomy-lo);
+  stroke-width: 0.6px;
+  vector-effect: non-scaling-stroke;
+}
+
+.hyb-pedals {
+  display: flex;
+  padding: 1px;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hyb-pedal {
+  font: inherit;
+  font-family: var(--anatomy-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  min-width: 34px;
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--anatomy-text);
+  background: var(--anatomy-card);
+  box-shadow: 0 0 0 1px var(--anatomy-lo);
+  cursor: pointer;
+}
+
+.hyb-pedal[aria-pressed="true"] {
+  color: var(--anatomy-strong);
+  box-shadow: 0 0 0 1px var(--anatomy-hi);
+}
+
+.hyb-pedal:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 2px;
+}
+
+.hyb-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .hyb {
+    overflow: hidden;
+  }
+
+  .iso-plate .hyb .hyb-stage {
+    width: 112%;
+    margin: -3% -6% -2%;
+  }
+}
