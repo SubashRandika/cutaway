@@ -6,6 +6,7 @@ import { frameOf } from "./frame.mjs";
 import { driveAt, gearName, readoutOf, requestGear, spokenOf, stepDrive } from "./model.mjs";
 import { HEIGHT, WIDTH } from "./view.mjs";
 import { mountGas } from "./gas.mjs";
+import { CalloutKey, Callouts, type Callout } from "../callouts";
 
 type Drive = ReturnType<typeof driveAt>;
 type Frame = Record<string, unknown>;
@@ -73,9 +74,10 @@ interface Props {
   back: string;
   front: string;
   restCrank: number;
+  labels: Callout[];
 }
 
-export function EngineLive({ label, defs, back, front, restCrank }: Props) {
+export function EngineLive({ label, defs, back, front, restCrank, labels }: Props) {
   const { anchor, say } = useReadout<HTMLDivElement>();
   const root = React.useRef<HTMLDivElement | null>(null);
   const canvas = React.useRef<HTMLCanvasElement | null>(null);
@@ -98,6 +100,7 @@ export function EngineLive({ label, defs, back, front, restCrank }: Props) {
   const [poke, setPoke] = React.useState(0);
   const [gear, setGear] = React.useState(0);
   const [spoken, setSpoken] = React.useState("");
+  const [named, setNamed] = React.useState(true);
 
   const draw = React.useCallback(() => {
     const d = drive.current;
@@ -319,6 +322,7 @@ export function EngineLive({ label, defs, back, front, restCrank }: Props) {
         <svg className="iso-svg eng-front" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} aria-hidden="true" focusable="false">
           <g dangerouslySetInnerHTML={{ __html: front }} />
         </svg>
+        <Callouts items={labels} width={WIDTH} height={HEIGHT} show={named} />
       </div>
       <div className="eng-gears" role="group" aria-label="Gear">
         {[0, 1, 2, 3, 4, 5].map((n) => (
@@ -326,7 +330,11 @@ export function EngineLive({ label, defs, back, front, restCrank }: Props) {
             {n === 0 ? "N" : n}
           </button>
         ))}
+        <button type="button" className="eng-gear callout-toggle" aria-pressed={named} onClick={() => setNamed((on) => !on)}>
+          Labels
+        </button>
       </div>
+      <CalloutKey items={labels} show={named} />
       <span className="eng-live" aria-live="polite">
         {spoken}
       </span>

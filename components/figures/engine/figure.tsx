@@ -2,6 +2,7 @@ import { Plate } from "../../iso/react/draw";
 import { EngineArt } from "./art";
 import { DISPLACEMENT, ENGINE, FINAL_RATIO, IDLE, PAIRS, RATIOS, REDLINE, SLOW, TYRE, driveAt, readoutOf } from "./model.mjs";
 import { REST_STATE } from "./scene.mjs";
+import "../callouts.css";
 import "./engine.css";
 
 const resting = () => {

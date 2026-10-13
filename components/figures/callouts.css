@@ -1,0 +1,132 @@
+.callouts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.callouts[data-show] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease;
+}
+
+.callouts > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* a paper underlay keeps the leader legible where it crosses the drawing */
+.callout-halo {
+  fill: none;
+  stroke: var(--anatomy-paper);
+  stroke-width: 2.6px;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.85;
+}
+
+.callout-line {
+  fill: none;
+  stroke: var(--anatomy-muted);
+  stroke-width: 0.7px;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.callout-dot {
+  fill: var(--anatomy-paper);
+  stroke: var(--anatomy-strong);
+  stroke-width: 0.9px;
+  vector-effect: non-scaling-stroke;
+}
+
+.callout-end {
+  fill: var(--anatomy-muted);
+  stroke: none;
+}
+
+.callout {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--anatomy-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--anatomy-text);
+  transform: translate(4px, -50%);
+}
+
+.callout[data-align="end"] {
+  flex-direction: row-reverse;
+  transform: translate(calc(-100% - 4px), -50%);
+}
+
+.callout b,
+.callout-key b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 9px;
+  color: var(--anatomy-strong);
+  background: var(--anatomy-card);
+  box-shadow: 0 0 0 1px var(--anatomy-lo);
+}
+
+.callout-name {
+  padding: 1px 3px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--anatomy-card) 82%, transparent);
+}
+
+.callout-key {
+  display: none;
+}
+
+.callout-toggle {
+  margin-left: auto;
+}
+
+@media (max-width: 640px) {
+  .callout-name {
+    display: none;
+  }
+
+  .callout {
+    transform: translate(-50%, -50%);
+  }
+
+  .callout[data-align="end"] {
+    transform: translate(-50%, -50%);
+  }
+
+  .callout-key[data-show] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 12px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--anatomy-mono);
+    font-size: 10.5px;
+    color: var(--anatomy-text);
+  }
+
+  .callout-key li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}

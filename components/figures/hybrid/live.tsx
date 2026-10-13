@@ -5,6 +5,7 @@ import { asksForStillness, useReadout } from "../../iso/react/live";
 import { frameOf } from "./frame.mjs";
 import { carAt, readoutOf, spokenOf, steadySpeed, stepCar } from "./model.mjs";
 import { HEIGHT, WIDTH } from "./view.mjs";
+import { CalloutKey, Callouts, type Callout } from "../callouts";
 
 type Car = ReturnType<typeof carAt>;
 type Frame = Record<string, unknown>;
@@ -80,9 +81,10 @@ interface Props {
   body: string;
   flows: Record<string, number>;
   restCrank: number;
+  labels: Callout[];
 }
 
-export function HybridLive({ label, defs, body, flows, restCrank }: Props) {
+export function HybridLive({ label, defs, body, flows, restCrank, labels }: Props) {
   const { anchor, say } = useReadout<HTMLDivElement>();
   const root = React.useRef<HTMLDivElement | null>(null);
   const stage = React.useRef<HTMLDivElement | null>(null);
@@ -104,6 +106,7 @@ export function HybridLive({ label, defs, body, flows, restCrank }: Props) {
   const [poke, setPoke] = React.useState(0);
   const [pedal, setPedal] = React.useState(0);
   const [spoken, setSpoken] = React.useState("");
+  const [named, setNamed] = React.useState(true);
 
   const draw = React.useCallback(
     (dt = 0) => {
@@ -334,6 +337,7 @@ export function HybridLive({ label, defs, body, flows, restCrank }: Props) {
           <defs dangerouslySetInnerHTML={{ __html: defs }} />
           <g dangerouslySetInnerHTML={{ __html: body }} />
         </svg>
+        <Callouts items={labels} width={WIDTH} height={HEIGHT} show={named} />
       </div>
       <div className="hyb-pedals" role="group" aria-label="Pedal">
         {PEDALS.map(([name, value]) => (
@@ -341,7 +345,11 @@ export function HybridLive({ label, defs, body, flows, restCrank }: Props) {
             {name}
           </button>
         ))}
+        <button type="button" className="hyb-pedal callout-toggle" aria-pressed={named} onClick={() => setNamed((on) => !on)}>
+          Labels
+        </button>
       </div>
+      <CalloutKey items={labels} show={named} />
       <span className="hyb-live" aria-live="polite">
         {spoken}
       </span>

@@ -140,6 +140,10 @@
   vector-effect: non-scaling-stroke;
 }
 
+.hyb-stage {
+  position: relative;
+}
+
 .hyb-pedals {
   display: flex;
   padding: 1px;

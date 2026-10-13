@@ -1,6 +1,7 @@
 import { Plate } from "../../iso/react/draw";
 import { HybridArt } from "./art";
 import { BATTERY, BATTERY_KWH, DISPLACEMENT, ENGINE, ENGINE_ON, EV_SPEED, MG2_POWER, MG2_TO_RING, PSD, RHO, RING_TO_WHEEL, SLOW, SYSTEM_POWER, carAt, readoutOf } from "./model.mjs";
+import "../callouts.css";
 import "./hybrid.css";
 
 const resting = () => readoutOf(carAt());
