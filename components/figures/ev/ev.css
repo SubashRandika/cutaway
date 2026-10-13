@@ -1,0 +1,215 @@
+.elv {
+  --elv-cut: #ece5d9;
+  --elv-cut-line: #8f8a84;
+  --elv-cav-0: #aeaeab;
+  --elv-cav-1: #b8b8b5;
+  --elv-cav-2: #c2c2bf;
+  --elv-cav-3: #cbcbc8;
+  --elv-cav-top: #d3d3d0;
+  --elv-cav-line: #8e8e92;
+  --elv-rubber: #d0d0cc;
+  --elv-oil: #dcd5c4;
+  --elv-oil-line: #a8976a;
+  --elv-dial: #fbfaf7;
+  --elv-spark: #ffb020;
+  --elv-spark-core: #fffbe8;
+  --elv-pulse: #3a3a3f;
+  --elv-pulse-shine: #8a8a8f;
+  border-radius: 10px;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.iso[data-theme="dark"] .elv {
+  --elv-cut: #222220;
+  --elv-cut-line: #5a5a5c;
+  --elv-cav-0: #0c0c0c;
+  --elv-cav-1: #0e0e0e;
+  --elv-cav-2: #101010;
+  --elv-cav-3: #121212;
+  --elv-cav-top: #141414;
+  --elv-cav-line: #333335;
+  --elv-rubber: #0d0d0d;
+  --elv-oil: #2a2519;
+  --elv-oil-line: #4a4230;
+  --elv-dial: #1b1b1a;
+  --elv-pulse: #d8d8d8;
+  --elv-pulse-shine: #ffffff;
+}
+
+.elv:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.elv .iso-svg {
+  overflow: visible;
+}
+
+.elv-cut {
+  fill: var(--elv-cut);
+  fill-rule: evenodd;
+  stroke: var(--elv-cut-line);
+  stroke-width: 0.6px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.elv-cav {
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.elv-cav[data-shade="0"] { fill: var(--elv-cav-0); stroke: var(--elv-cav-0); }
+.elv-cav[data-shade="1"] { fill: var(--elv-cav-1); stroke: var(--elv-cav-1); }
+.elv-cav[data-shade="2"] { fill: var(--elv-cav-2); stroke: var(--elv-cav-2); }
+.elv-cav[data-shade="3"] { fill: var(--elv-cav-3); stroke: var(--elv-cav-3); }
+.elv-cav[data-shade="top"] { fill: var(--elv-cav-top); stroke: var(--elv-cav-top); }
+
+.elv-cav-line {
+  fill: none;
+  stroke: var(--elv-cav-line);
+  stroke-width: 0.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.elv-cavsolid > .iso-shade[data-shade="0"] { fill: var(--elv-cav-0); }
+.elv-cavsolid > .iso-shade[data-shade="1"] { fill: var(--elv-cav-1); }
+.elv-cavsolid > .iso-shade[data-shade="2"] { fill: var(--elv-cav-2); }
+.elv-cavsolid > .iso-shade[data-shade="3"] { fill: var(--elv-cav-3); }
+.elv-cavsolid > .iso-top { fill: var(--elv-cav-top); }
+
+.elv-rubber > .iso-top,
+.elv-rubber > .iso-shade {
+  fill: var(--elv-rubber);
+}
+
+.elv-oil {
+  fill: var(--elv-oil);
+  stroke: var(--elv-oil-line);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.elv-oil-cut {
+  fill: var(--elv-oil);
+  stroke: none;
+}
+
+.elv-dial {
+  fill: var(--elv-dial);
+  stroke: none;
+}
+
+.elv-needle {
+  stroke-width: 1.1px;
+}
+
+.elv-fade-1 { opacity: 0.25; }
+.elv-fade-2 { opacity: 0.5; }
+.elv-fade-3 { opacity: 0.75; }
+
+.elv-spark { fill: var(--elv-spark); stroke: none; }
+.elv-spark-core { fill: var(--elv-spark-core); stroke: none; }
+
+.elv .iso-fill { fill-rule: evenodd; }
+
+/* Windings and cables carrying current take the figure's one accent. */
+.elv .elv-wind[data-on] .iso-fill { fill: var(--anatomy-face); }
+.elv .elv-wind[data-on] .iso-top { fill: var(--anatomy-lit-top); }
+.elv .elv-wind[data-on] .iso-shade { fill: var(--anatomy-lit-shade); }
+.elv .elv-wind[data-on] .iso-edge { stroke: var(--anatomy-lit); stroke-width: 1.1px; }
+
+/* a pulse of current: a dark slug on paper, a bright one on the dark plate */
+.elv .elv-cable[data-on] .tb-body,
+.elv .elv-cable[data-on] .tb-shade { fill: var(--elv-pulse); }
+.elv .elv-cable[data-on] .tb-shine { fill: var(--elv-pulse-shine); }
+.elv .elv-cable[data-on] .iso-line { stroke: var(--anatomy-lit); }
+
+/* the charge lamps: dark until current flows from the wall */
+.elv-led {
+  fill: var(--anatomy-lo);
+  stroke: var(--anatomy-mid);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.elv .elv-led[data-on] {
+  fill: var(--anatomy-lit);
+  stroke: var(--anatomy-lit);
+}
+
+.elv-plate {
+  fill: var(--anatomy-top);
+  stroke: var(--anatomy-lo);
+  stroke-width: 0.6px;
+  vector-effect: non-scaling-stroke;
+}
+
+.elv-stage {
+  position: relative;
+}
+
+.elv-pedals {
+  display: flex;
+  padding: 1px;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.elv-gap {
+  width: 6px;
+}
+
+.elv-pedal {
+  font: inherit;
+  font-family: var(--anatomy-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  min-width: 34px;
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--anatomy-text);
+  background: var(--anatomy-card);
+  box-shadow: 0 0 0 1px var(--anatomy-lo);
+  cursor: pointer;
+}
+
+.elv-pedal[aria-pressed="true"] {
+  color: var(--anatomy-strong);
+  box-shadow: 0 0 0 1px var(--anatomy-hi);
+}
+
+.elv-pedal:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 2px;
+}
+
+.elv-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .elv {
+    overflow: hidden;
+  }
+
+  .iso-plate .elv .elv-stage {
+    width: 112%;
+    margin: -3% -6% -2%;
+  }
+}

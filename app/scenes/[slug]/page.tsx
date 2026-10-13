@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { EngineFigure } from "@/components/figures/engine/figure";
 import { HybridFigure } from "@/components/figures/hybrid/figure";
 import { PhevFigure } from "@/components/figures/phev/figure";
+import { EvFigure } from "@/components/figures/ev/figure";
 import { SCENES, sceneOf } from "@/lib/scenes";
 
 // The figure for each scene, server-rendered. Add a scene here and in lib/scenes.ts.
@@ -18,6 +19,10 @@ const FIGURES: Record<string, { lede: string; Figure: () => React.ReactNode }> =
   "plug-in-hybrid": {
     lede: "A plug-in hybrid carries a battery big enough to live on: charged from the wall, it drives the car on its electric motor for everyday trips. When the pull is hard, the road is long or the pack runs low, the engine starts and turns a generator whose current feeds the motor. At a steady cruise a clutch can lock the engine straight to the wheels, the most efficient way to use it at speed.",
     Figure: PhevFigure,
+  },
+  "electric-car": {
+    lede: "An electric car has no engine, no gearbox and no clutch. A large battery of lithium iron phosphate cells feeds an inverter, which turns its direct current into the three-phase current that spins a permanent-magnet motor; two fixed gear stages slow that spin to wheel speed. Lift off or brake and the motor runs as a generator, sending energy back to the pack. Charging is AC through the car's own charger at home, or DC straight into the pack at a fast charger.",
+    Figure: EvFigure,
   },
 };
 

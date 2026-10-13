@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BatteryChargingIcon, FuelIcon, PlugZapIcon } from "lucide-react";
+import { BatteryChargingIcon, CarFrontIcon, FuelIcon, PlugZapIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import { SCENES, hrefOf } from "@/lib/scenes";
 
-const ICONS = { fuel: FuelIcon, hybrid: BatteryChargingIcon, plug: PlugZapIcon };
+const ICONS = { fuel: FuelIcon, hybrid: BatteryChargingIcon, plug: PlugZapIcon, electric: CarFrontIcon };
 
 export function AppSidebar() {
   const pathname = usePathname();
