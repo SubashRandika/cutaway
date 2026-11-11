@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BatteryChargingIcon, CarFrontIcon, FuelIcon, PlugZapIcon } from "lucide-react";
+import { AtomIcon, BatteryChargingIcon, CarFrontIcon, FuelIcon, PlugZapIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -14,9 +14,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { SCENES, hrefOf } from "@/lib/scenes";
+import { CATEGORIES, hrefOf, scenesIn } from "@/lib/scenes";
 
-const ICONS = { fuel: FuelIcon, hybrid: BatteryChargingIcon, plug: PlugZapIcon, electric: CarFrontIcon };
+const ICONS = { fuel: FuelIcon, hybrid: BatteryChargingIcon, plug: PlugZapIcon, electric: CarFrontIcon, atom: AtomIcon };
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -25,30 +25,36 @@ export function AppSidebar() {
   return (
     <Sidebar className="top-(--header-height) h-[calc(100svh-var(--header-height))]!">
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Scenes</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {SCENES.map((scene) => {
-                const href = hrefOf(scene);
-                const Icon = ICONS[scene.icon];
-                return (
-                  <SidebarMenuItem key={scene.slug}>
-                    <SidebarMenuButton asChild size="lg" isActive={pathname === href} tooltip={scene.title}>
-                      <Link href={href} onClick={() => isMobile && setOpenMobile(false)}>
-                        <Icon />
-                        <span className="flex flex-col gap-0.5 leading-tight">
-                          <span className="font-medium">{scene.title}</span>
-                          <span className="text-xs text-muted-foreground">{scene.summary}</span>
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {CATEGORIES.map((category) => {
+          const scenes = scenesIn(category.id);
+          if (!scenes.length) return null;
+          return (
+            <SidebarGroup key={category.id}>
+              <SidebarGroupLabel>{category.title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {scenes.map((scene) => {
+                    const href = hrefOf(scene);
+                    const Icon = ICONS[scene.icon];
+                    return (
+                      <SidebarMenuItem key={scene.slug}>
+                        <SidebarMenuButton asChild size="lg" isActive={pathname === href} tooltip={scene.title}>
+                          <Link href={href} onClick={() => isMobile && setOpenMobile(false)}>
+                            <Icon />
+                            <span className="flex flex-col gap-0.5 leading-tight">
+                              <span className="font-medium">{scene.title}</span>
+                              <span className="text-xs text-muted-foreground">{scene.summary}</span>
+                            </span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  })}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          );
+        })}
       </SidebarContent>
     </Sidebar>
   );
