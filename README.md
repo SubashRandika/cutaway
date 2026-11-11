@@ -1,6 +1,6 @@
 # Cutaway
 
-Interactive isometric cutaway drawings of car drivetrains. Each scene is a working rig drawn as a monochrome technical illustration: you drive it, and every moving part, gauge and readout comes from a small physical model of the real thing.
+Interactive isometric cutaway drawings of real machines: car drivetrains and a nuclear power plant. Each scene is a working rig drawn as a monochrome technical illustration: you drive it, and every moving part, gauge and readout comes from a small physical model of the real thing.
 
 ## Scenes
 
@@ -10,8 +10,9 @@ Interactive isometric cutaway drawings of car drivetrains. Each scene is a worki
 | 2 | Hybrid system | A planetary power split between engine, two motor-generators and the wheels | ↑ ↓ pedal · Home coast · End floor it · B brake · 1–5 pedal position |
 | 3 | Plug-in hybrid | Battery drive, series mode and the engine-lock clutch at cruise | As Fig 2, plus P plug in or unplug · S toggle Save |
 | 4 | Electric car | Blade-cell pack, inverter, motor and fixed reduction; AC and DC charging | As Fig 2, plus A charge on AC · D charge on DC |
+| 5 | Nuclear power plant | A pressurised water reactor: core and control rods, steam generator, turbines, condenser, generator and transformer; load following, a trip and decay heat | ↑ ↓ load · Home standby · End full · 1–4 load · S trip · R reset |
 
-On every figure you can also move the pointer across the drawing (hover or drag) as a pedal or throttle, toggle part labels, and switch between light and dark themes from the header. Leave a figure alone for a few seconds and it plays a short demo. Motion runs slower than true speed so the parts can be followed; each card's hint says by how much.
+The sidebar groups the scenes by category (Vehicles, Power plants). On every figure you can also move the pointer across the drawing (hover or drag) as a pedal, throttle or load setting, toggle part labels, and switch between light and dark themes from the header. Leave a figure alone for a few seconds and it plays a short demo. Motion runs slower than true speed so the parts can be followed; each card's hint says by how much.
 
 ## Getting started
 
@@ -51,14 +52,14 @@ components/
   ui/                     shadcn/ui primitives
   figures/
     callouts.tsx, .css    Part labels laid over a figure
-    engine/ hybrid/ phev/ ev/   One folder per scene (see below)
+    engine/ hybrid/ phev/ ev/ nuclear/   One folder per scene (see below)
   iso/                    The shared isometric drawing kit
     iso-kit.mjs           Projection, extruded solids, lines, dots, plate markup
     lathe.mjs             Solids of revolution, prisms, gears, frames, fillets
     tube.mjs              Shaded tubes for cables and pipes
     gl.mjs                WebGL layer in the figure's own camera
     react/                Plate, Stage and animation hooks
-lib/scenes.ts             The scene list (slug, title, summary, icon)
+lib/scenes.ts             The scene list (slug, title, summary, icon, category) and the categories
 scripts/                  Standalone preview pages for each scene
 ```
 
@@ -81,7 +82,7 @@ The static art is computed on the server; in the browser, only the keyed parts a
 ## Adding a scene
 
 1. Create `components/figures/<name>/` with the files above, using an existing scene as a template.
-2. Add the scene to `SCENES` in `lib/scenes.ts`. If it needs a new icon, add it to `ICONS` in `components/app/app-sidebar.tsx`.
+2. Add the scene to `SCENES` in `lib/scenes.ts` with its `category` (add a new one to `CATEGORIES` if none fits). If it needs a new icon, add it to `ICONS` in `components/app/app-sidebar.tsx`.
 3. Add its lede and figure to `FIGURES` in `app/scenes/[slug]/page.tsx`.
 
 ## Preview scripts
@@ -91,5 +92,5 @@ Each script writes one scene at rest as a standalone HTML page in `shots/` (giti
 ```bash
 node scripts/preview-engine.mjs          # shots/engine-preview.html
 node scripts/preview-ev.mjs --dark       # shots/ev-preview-dark.html
-node scripts/preview-phev.mjs --pose     # an alternate pose, where supported (ev, phev)
+node scripts/preview-phev.mjs --pose     # an alternate pose, where supported (ev, phev, nuclear)
 ```

@@ -4,6 +4,7 @@ import { EngineFigure } from "@/components/figures/engine/figure";
 import { HybridFigure } from "@/components/figures/hybrid/figure";
 import { PhevFigure } from "@/components/figures/phev/figure";
 import { EvFigure } from "@/components/figures/ev/figure";
+import { NuclearFigure } from "@/components/figures/nuclear/figure";
 import { SCENES, sceneOf } from "@/lib/scenes";
 
 // The figure for each scene, server-rendered. Add a scene here and in lib/scenes.ts.
@@ -23,6 +24,10 @@ const FIGURES: Record<string, { lede: string; Figure: () => React.ReactNode }> =
   "electric-car": {
     lede: "An electric car has no engine, no gearbox and no clutch. A large battery of lithium iron phosphate cells feeds an inverter, which turns its direct current into the three-phase current that spins a permanent-magnet motor; two fixed gear stages slow that spin to wheel speed. Lift off or brake and the motor runs as a generator, sending energy back to the pack. Charging is AC through the car's own charger at home, or DC straight into the pack at a fast charger.",
     Figure: EvFigure,
+  },
+  "nuclear-power-plant": {
+    lede: "A nuclear power plant is a steam power station whose fire is fission. In a pressurised water reactor, uranium fuel heats water kept under such pressure that it cannot boil. That water carries the heat to a steam generator, where it boils a second, separate circuit of water into steam. The steam spins turbines, the turbines spin a generator, and the condenser turns the spent steam back into water to be pumped round again. Control rods, which soak up neutrons, set how fast the chain reaction runs; dropped all the way in, they stop it.",
+    Figure: NuclearFigure,
   },
 };
 

@@ -1,0 +1,297 @@
+.npp {
+  --npp-cut: #ece5d9;
+  --npp-cut-line: #8f8a84;
+  --npp-cav-0: #aeaeab;
+  --npp-cav-1: #b8b8b5;
+  --npp-cav-2: #c2c2bf;
+  --npp-cav-3: #cbcbc8;
+  --npp-cav-top: #d3d3d0;
+  --npp-cav-line: #8e8e92;
+  --npp-rubber: #d0d0cc;
+  --npp-oil: #dcd5c4;
+  --npp-oil-line: #a8976a;
+  --npp-dial: #fbfaf7;
+  --npp-spark: #ffb020;
+  --npp-spark-core: #fffbe8;
+  --npp-pulse: #8e8e94;
+  --npp-pulse-shine: #c4c4c8;
+  border-radius: 10px;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.iso[data-theme="dark"] .npp {
+  --npp-cut: #222220;
+  --npp-cut-line: #5a5a5c;
+  --npp-cav-0: #0c0c0c;
+  --npp-cav-1: #0e0e0e;
+  --npp-cav-2: #101010;
+  --npp-cav-3: #121212;
+  --npp-cav-top: #141414;
+  --npp-cav-line: #333335;
+  --npp-rubber: #0d0d0d;
+  --npp-oil: #2a2519;
+  --npp-oil-line: #4a4230;
+  --npp-dial: #1b1b1a;
+  --npp-pulse: #d8d8d8;
+  --npp-pulse-shine: #ffffff;
+}
+
+.npp:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.npp .iso-svg {
+  overflow: visible;
+}
+
+.npp-cut {
+  fill: var(--npp-cut);
+  fill-rule: evenodd;
+  stroke: var(--npp-cut-line);
+  stroke-width: 0.6px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp-cav {
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp-cav[data-shade="0"] { fill: var(--npp-cav-0); stroke: var(--npp-cav-0); }
+.npp-cav[data-shade="1"] { fill: var(--npp-cav-1); stroke: var(--npp-cav-1); }
+.npp-cav[data-shade="2"] { fill: var(--npp-cav-2); stroke: var(--npp-cav-2); }
+.npp-cav[data-shade="3"] { fill: var(--npp-cav-3); stroke: var(--npp-cav-3); }
+.npp-cav[data-shade="top"] { fill: var(--npp-cav-top); stroke: var(--npp-cav-top); }
+
+.npp-cav-line {
+  fill: none;
+  stroke: var(--npp-cav-line);
+  stroke-width: 0.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp-cavsolid > .iso-shade[data-shade="0"] { fill: var(--npp-cav-0); }
+.npp-cavsolid > .iso-shade[data-shade="1"] { fill: var(--npp-cav-1); }
+.npp-cavsolid > .iso-shade[data-shade="2"] { fill: var(--npp-cav-2); }
+.npp-cavsolid > .iso-shade[data-shade="3"] { fill: var(--npp-cav-3); }
+.npp-cavsolid > .iso-top { fill: var(--npp-cav-top); }
+
+.npp-rubber > .iso-top,
+.npp-rubber > .iso-shade {
+  fill: var(--npp-rubber);
+}
+
+.npp-oil {
+  fill: var(--npp-oil);
+  stroke: var(--npp-oil-line);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp-oil-cut {
+  fill: var(--npp-oil);
+  stroke: none;
+}
+
+.npp-dial {
+  fill: var(--npp-dial);
+  stroke: none;
+}
+
+.npp-needle {
+  stroke-width: 1.1px;
+}
+
+.npp-fade-1 { opacity: 0.25; }
+.npp-fade-2 { opacity: 0.5; }
+.npp-fade-3 { opacity: 0.75; }
+
+.npp-spark { fill: var(--npp-spark); stroke: none; }
+.npp-spark-core { fill: var(--npp-spark-core); stroke: none; }
+
+.npp .iso-fill { fill-rule: evenodd; }
+
+/* Windings and cables carrying current take the figure's one accent. */
+.npp .npp-wind[data-on] .iso-fill { fill: var(--anatomy-face); }
+.npp .npp-wind[data-on] .iso-top { fill: var(--anatomy-lit-top); }
+.npp .npp-wind[data-on] .iso-shade { fill: var(--anatomy-lit-shade); }
+.npp .npp-wind[data-on] .iso-edge { stroke: var(--anatomy-lit); stroke-width: 1.1px; }
+
+/* a pulse of current: a dark slug on paper, a bright one on the dark plate */
+.npp .npp-cable[data-on] .tb-body,
+.npp .npp-cable[data-on] .tb-shade { fill: var(--npp-pulse); }
+.npp .npp-cable[data-on] .tb-shine { fill: var(--npp-pulse-shine); }
+.npp .npp-cable[data-on] .iso-line { stroke: var(--anatomy-lit); }
+
+/* the charge lamps: dark until current flows from the wall */
+.npp-led {
+  fill: var(--anatomy-lo);
+  stroke: var(--anatomy-mid);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp .npp-led[data-on] {
+  fill: var(--anatomy-lit);
+  stroke: var(--anatomy-lit);
+}
+
+.npp-plate {
+  fill: var(--anatomy-top);
+  stroke: var(--anatomy-lo);
+  stroke-width: 0.6px;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp-stage {
+  position: relative;
+}
+
+.npp-pedals {
+  display: flex;
+  padding: 1px;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.npp-gap {
+  width: 6px;
+}
+
+.npp-pedal {
+  font: inherit;
+  font-family: var(--anatomy-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  min-width: 34px;
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--anatomy-text);
+  background: var(--anatomy-card);
+  box-shadow: 0 0 0 1px var(--anatomy-lo);
+  cursor: pointer;
+}
+
+.npp-pedal[aria-pressed="true"] {
+  color: var(--anatomy-strong);
+  box-shadow: 0 0 0 1px var(--anatomy-hi);
+}
+
+.npp-pedal:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 2px;
+}
+
+.npp-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .npp {
+    overflow: hidden;
+  }
+
+  .iso-plate .npp .npp-stage {
+    width: 112%;
+    margin: -3% -6% -2%;
+  }
+}
+
+/* ---------- the plant's own surfaces ---------- */
+.npp {
+  --npp-water: #dfe7ec;
+  --npp-water-op: 0.55;
+  --npp-fuel: #e9e4da;
+  --npp-glow: #000000;
+  --npp-glow-max: 0.2;
+}
+
+.iso[data-theme="dark"] .npp {
+  --npp-water: #16232c;
+  --npp-water-op: 0.6;
+  --npp-fuel: #1e1d1a;
+  --npp-glow: #ffffff;
+  --npp-glow-max: 0.62;
+}
+
+/* the containment's inside: paper tones by facing, seamless */
+.npp-inwall { stroke-width: 0.5px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.npp-inwall[data-shade="0"] { fill: var(--anatomy-shade-0); stroke: var(--anatomy-shade-0); }
+.npp-inwall[data-shade="1"] { fill: var(--anatomy-shade-1); stroke: var(--anatomy-shade-1); }
+.npp-inwall[data-shade="2"] { fill: var(--anatomy-shade-2); stroke: var(--anatomy-shade-2); }
+.npp-inwall[data-shade="3"] { fill: var(--anatomy-shade-3); stroke: var(--anatomy-shade-3); }
+.npp-inwall[data-shade="top"] { fill: var(--anatomy-top); stroke: var(--anatomy-top); }
+
+/* the outside of a cut body's back half */
+.npp-shell > path { stroke-width: 0.5px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.npp-shell > .iso-shade[data-shade="0"] { stroke: var(--anatomy-shade-0); }
+.npp-shell > .iso-shade[data-shade="1"] { stroke: var(--anatomy-shade-1); }
+.npp-shell > .iso-shade[data-shade="2"] { stroke: var(--anatomy-shade-2); }
+.npp-shell > .iso-shade[data-shade="3"] { stroke: var(--anatomy-shade-3); }
+.npp-shell > .iso-top { stroke: var(--anatomy-top); }
+
+/* water in the vessels, the hotwell and the canal: a faint tint over what lies behind */
+.npp-water {
+  fill: var(--npp-water);
+  fill-opacity: var(--npp-water-op);
+  stroke: none;
+}
+
+/* the fuel's cut faces, and the glow of fission over them, its opacity set by the core's heat */
+.npp-fuel {
+  fill: var(--npp-fuel);
+  stroke: var(--npp-cut-line, var(--elv-cut-line, #8f8a84));
+  stroke-width: 0.4px;
+  vector-effect: non-scaling-stroke;
+}
+
+.npp-glow {
+  fill: var(--npp-glow);
+  stroke: none;
+  mix-blend-mode: normal;
+  fill-opacity: var(--npp-glow-max);
+  transition: opacity 0.12s linear;
+}
+
+/* bank D, the rods the reader drives, take the accent */
+.npp-rod[data-bank] .iso-line[data-tone="hi"] { stroke: var(--anatomy-lit); stroke-width: 0.9px; }
+
+/* pulses of water, steam and current running the way they flow */
+.npp .npp-pipe[data-on] .tb-body,
+.npp .npp-pipe[data-on] .tb-shade { fill: var(--npp-pulse); }
+.npp .npp-pipe[data-on] .tb-shine { fill: var(--npp-pulse-shine); }
+.npp .npp-pipe[data-on] .iso-line { stroke: var(--anatomy-lit); }
+
+/* lamps: the trip lamp, the grid lamp, the breaker's lamp */
+.npp-led {
+  fill: var(--anatomy-lo);
+  stroke: var(--anatomy-mid);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+.npp .npp-led[data-on] { fill: var(--anatomy-lit); stroke: var(--anatomy-lit); }
+
+/* the trip button lights while the reactor is tripped */
+.npp .npp-scram[data-on] .iso-fill { fill: var(--anatomy-face); }
+.npp .npp-scram[data-on] .iso-edge { stroke: var(--anatomy-lit); stroke-width: 1.1px; }
+
+.npp-buttons { display: flex; padding: 1px; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.npp-trip[aria-pressed="true"] { color: var(--anatomy-strong); box-shadow: 0 0 0 1px var(--anatomy-lit); }
+.npp-pedal:disabled { opacity: 0.45; cursor: default; }
